@@ -38,7 +38,7 @@ async function getInstructions() {
 
 async function getValidInstructions() {
   const memoryInstructions = await getInstructions();
-  const regexp = /mul\((-?\d{1,3}),(-?\d{1,3})\)/g;
+  const regexp = /mul\((-?\d{1,3}),(-?\d{1,3})\)|do\(\)|don't\(\)/g;
 
   const validInstructions = memoryInstructions.match(regexp);
 
@@ -55,8 +55,23 @@ async function getMultResult() {
   }
 
   const regexp = /-?\d+/g;
+  let enabled = true;
 
   const result = instructions.reduce((acc, curr) => {
+    if (curr === 'do()') {
+      enabled = true;
+
+      return acc;
+    }
+
+    if (curr === "don't()") {
+      enabled = false;
+
+      return acc;
+    }
+
+    if (!enabled) return acc;
+
     const match = curr.match(regexp);
 
     if (null != match) {
@@ -69,10 +84,10 @@ async function getMultResult() {
   return result;
 }
 
-async function part1() {
+async function main() {
   const result = await getMultResult();
 
   console.log(`Result: ${result}`);
 }
 
-part1();
+main();
