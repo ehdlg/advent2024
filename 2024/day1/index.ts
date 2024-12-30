@@ -61,7 +61,7 @@ Your actual left and right lists contain many location IDs. What is the total di
 
  */
 import path from 'node:path';
-import { getContentsFromFile } from '../utils';
+import { getContentsFromFile } from '../../utils';
 
 export async function getLists() {
   const FILE_PATH = path.join(__dirname, './puzzle.txt');
@@ -110,7 +110,7 @@ async function getTotalDistance() {
 async function part1() {
   const distance = await getTotalDistance();
 
-  console.log(distance);
+  console.log(`Distance: ${distance}`);
 }
 
 part1();
@@ -155,3 +155,25 @@ So, for these example lists, the similarity score at the end of this process is 
 Once again consider your left and right lists. What is their similarity score?
 
  */
+
+async function getSimilarityScore() {
+  const { leftList, rightList } = await getLists();
+  let similiarity = 0;
+
+  for (let i = 0; i < leftList.length; i++) {
+    const number = leftList[i];
+    const occurences = rightList.filter((n) => n === number).length;
+
+    similiarity += number * occurences;
+  }
+
+  return similiarity;
+}
+
+async function part2() {
+  const similiarity = await getSimilarityScore();
+
+  console.log(`Similarity: ${similiarity}`);
+}
+
+part2();

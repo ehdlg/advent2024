@@ -21,7 +21,7 @@ Scan the corrupted memory for uncorrupted mul instructions. What do you get if y
 
  */
 import path from 'node:path';
-import { getContentsFromFile } from '../utils';
+import { getContentsFromFile } from '../../utils';
 
 const multiply = (numbers: number[] | undefined) => {
   if (null == numbers) return 0;

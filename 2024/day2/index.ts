@@ -45,7 +45,7 @@ So, in this example, 2 reports are safe.
 Analyze the unusual data from the engineers. How many reports are safe?
  */
 import path from 'node:path';
-import { getContentsFromFile } from '../utils';
+import { getContentsFromFile } from '../../utils';
 
 async function getReports(): Promise<number[][]> {
   const FILE_PATH = path.join(__dirname, './puzzle.txt');
